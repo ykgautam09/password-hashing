@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Home</title>
+</head>
+
+<body>
+<div>
+    <form id="genForm" action='/generatePassword' method='POST'>
+        <label for="onlyDigit">passLength of Password</label>
+        <input type="number" id="passLength" name="passLength" placeholder="default 10">
+        <div>
+            <label for="onlyDigit">ONLY DIGIT</label>
+            <input id="onlyDigit" type="checkbox" name="onlyDigit">
+            <label for="number">NUMBER</label>
+            <input id="number" type="checkbox" name="number">
+            <label for="upperCase">UPPERCASE</label>
+            <input id="upperCase" type="checkbox" name="upperCase">
+            <label for="specialChar">SPECIAL CHARACTERS</label>
+            <input id="specialChar" type="checkbox" name="specialChar">
+        </div>
+        <button type="submit">Generate Password</button>
+    </form>
+</div>
+<% if( pass.length) { %>
+    <form id="passForm" action="/save" method="POST">
+        <div>
+            <input style="background: #8aa7b7" name="pass" type="text" readonly id="generatedPassword"
+                   value="<%= pass %>"><!-- pass generated password -->
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="email" required>
+        </div>
+        <div>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Username" required>
+        </div>
+        <div>
+            <label for="description">Miscellaneous Description</label>
+            <input type="text" id="description" name="description" placeholder="Miscellaneous">
+        </div>
+        <div>
+            <label for="link">URL/URI</label>
+            <input type="text" id="link" name="link" placeholder="url">
+        </div>
+        <button type="submit">Add</button>
+    </form>
+    <script>
+        let data = {
+            pass: $('#generatedPassword').val(),
+            username: $('#username').val(),
+            description: $('#description').val(),
+            link: $('#link').val()
+        }
+        console.log(data)
+    </script>
+<% } %>
+
+</body>
+
+</html>
